@@ -1,7 +1,8 @@
-from blog.data import posts
-from django.shortcuts import render
 from typing import Any
-from django.http import HttpRequest, Http404
+
+from blog.data import posts
+from django.http import Http404, HttpRequest
+from django.shortcuts import render
 
 
 def blog(request):
@@ -28,12 +29,12 @@ def post(request: HttpRequest, post_id: int):
             break
 
     if found_post is None:
-        raise Http404('Post não encontrado')
+        raise Http404('Post não existe.')
 
     context = {
         # 'text': 'Olá blog',
         'post': found_post,
-        'title': found_post['title']
+        'title': found_post['title'] + ' - ',
     }
 
     return render(
